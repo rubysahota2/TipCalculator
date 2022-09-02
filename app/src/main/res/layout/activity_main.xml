@@ -88,5 +88,29 @@
             app:layout_constraintTop_toTopOf="@+id/totalLabel"
             app:layout_constraintBottom_toBottomOf="@+id/totalLabel"
             app:layout_constraintStart_toStartOf="@+id/tipInput"/>
+
+    <Button
+            android:text="+"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/percentUpButton"
+            app:layout_constraintTop_toBottomOf="@+id/billAmountInput"
+            app:layout_constraintBottom_toBottomOf="@+id/percentageInput"
+            app:layout_constraintStart_toEndOf="@+id/percentageInput"
+            app:layout_constraintVertical_bias="0.0"
+            android:layout_marginStart="10dp"/>
+
+    <Button
+            android:text="-"
+            android:layout_width="54dp"
+            android:layout_height="48dp"
+            android:id="@+id/percentDownButton"
+            app:layout_constraintStart_toEndOf="@+id/percentUpButton"
+            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintHorizontal_bias="0.111"
+            app:layout_constraintTop_toTopOf="@+id/percentUpButton"
+            app:layout_constraintBottom_toBottomOf="@+id/percentUpButton"/>
     app:layout_constraintTop_toTopOf="@+id/percentLabel"
 </androidx.constraintlayout.widget.ConstraintLayout>

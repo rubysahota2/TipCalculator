@@ -3,7 +3,9 @@ package com.example.tipcalculator;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.app.Activity;
@@ -11,7 +13,7 @@ import android.os.Bundle;
 
 import java.text.NumberFormat;
 
-public class MainActivity extends Activity implements TextView.OnEditorActionListener {
+public class MainActivity extends Activity implements TextView.OnEditorActionListener, View.OnClickListener {
     // define the instance variables for the widgets that the class needs to work with
     private EditText billAmountEditText;
     private EditText percentageEditText;
@@ -21,6 +23,9 @@ public class MainActivity extends Activity implements TextView.OnEditorActionLis
     private SharedPreferences savedValues;
     private float billAmount = 0.0f;
     private float tipPercent = 15f;
+
+    private Button percentUpButton;
+    private Button percentDownButton;
 
    //The onCreate method begins by calling the onCreate method of the super- class,
    // which is necessary for the superclass to work correctly. Then, it uses the
@@ -34,11 +39,15 @@ public class MainActivity extends Activity implements TextView.OnEditorActionLis
         percentageEditText = findViewById(R.id.percentageInput);
         tipTextView = findViewById(R.id.tipInput);
         totalTextView = findViewById(R.id.totalInput);
+        percentUpButton = findViewById(R.id.percentUpButton);
+        percentDownButton = findViewById(R.id.percentDownButton);
 
         //After getting references to the widgets, this code sets the listeners.
         // First, it sets the current class as the listener for the EditorAction
         // event on the editable text view for the bill amount.
         percentageEditText.setOnEditorActionListener(this);
+        percentUpButton.setOnClickListener(this);
+        percentDownButton.setOnClickListener(this);
         savedValues = getPreferences(MODE_PRIVATE);
 
     }
@@ -79,7 +88,6 @@ public class MainActivity extends Activity implements TextView.OnEditorActionLis
     // widgets.
     private void calculateAndDisplay() {
         billAmount = Float.parseFloat(billAmountEditText.getText().toString());
-        tipPercent = Float.parseFloat(percentageEditText.getText().toString());
         float tipAmount = billAmount * (tipPercent / 100);
         float totalAmount = billAmount + tipAmount;
 
@@ -98,5 +106,22 @@ public class MainActivity extends Activity implements TextView.OnEditorActionLis
             calculateAndDisplay();
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case (R.id.percentUpButton):
+                tipPercent = tipPercent + 1f;
+                tipTextView.setText(String.valueOf(tipPercent));
+                calculateAndDisplay();
+                break;
+            case (R.id.percentDownButton):
+                tipPercent = tipPercent - 1f;
+                tipTextView.setText(String.valueOf(tipPercent));
+                calculateAndDisplay();
+                break;
+        }
+
     }
 }
