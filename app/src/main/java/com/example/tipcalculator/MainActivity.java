@@ -114,11 +114,13 @@ public class MainActivity extends Activity implements TextView.OnEditorActionLis
             case (R.id.percentUpButton):
                 tipPercent = tipPercent + 1f;
                 tipTextView.setText(String.valueOf(tipPercent));
+                percentageEditText.setText(String.valueOf(tipPercent));
                 calculateAndDisplay();
                 break;
             case (R.id.percentDownButton):
                 tipPercent = tipPercent - 1f;
                 tipTextView.setText(String.valueOf(tipPercent));
+                percentageEditText.setText(String.valueOf(tipPercent));
                 calculateAndDisplay();
                 break;
         }
